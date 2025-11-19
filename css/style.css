@@ -1,0 +1,263 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    /* Color de fondo principal */
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* --- 1. CONTENEDOR DE LA FOTO (HERO) --- */
+/* 1. ESTILO BASE (MÓVIL) */
+.hero-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* La imagen real */
+.hero-image {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.6, 1.1);
+    margin-top: 2rem;
+
+}
+
+/* 3. DESKTOP (Grande) */
+@media screen and (min-width: 1024px) {
+    .hero-image {
+        margin-top: 10rem;
+        width: 100%;
+        height: 100%;
+        transform: scale(1, 1.4);
+    }
+}
+
+
+/* --- EL DEGRADADO A NEGRO (CORREGIDO) --- */
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30vh;
+    /* OCUPA EL 40% DE LA ALTURA DE LA PANTALLA */
+
+    /* Degradado de Transparente a Negro Puro */
+    background: linear-gradient(to bottom, transparent 0%, #000000 100%);
+
+    z-index: 4;
+    /* Encima de la foto */
+    /*pointer-events: none;*/
+    /* Permite hacer click a través del degradado si fuera necesario */
+}
+
+.hero-overlay:hover {
+    cursor: pointer;
+}
+
+
+/* La flechita */
+.scroll-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    animation: bounce 2s infinite;
+    color: #ffffff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    /* Encima del degradado y la foto */
+}
+
+.scroll-indicator:hover {
+    cursor: pointer;
+}
+
+
+/* --- 2. SECCIÓN DE TEXTO INTERCALADO --- */
+.content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    background-color: #121212;
+    /* Coincide con el final del degradado */
+    position: relative;
+    z-index: 2;
+    /* Asegura que el contenido tape la foto al subir */
+}
+
+.text-block {
+    margin-bottom: 60px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.2);
+    width: 80%;
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.text-block h2 {
+    color: #57eb64;
+    margin-bottom: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Zig-Zag */
+.text-block:nth-child(odd) {
+    margin-right: auto;
+    text-align: left;
+    border-left: 5px solid #9d4edd;
+    transform: translateX(-100px);
+}
+
+.text-block:nth-child(even) {
+    margin-left: auto;
+    text-align: right;
+    border-right: 5px solid #57eb64;
+    transform: translateX(100px);
+}
+
+.text-block.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- 3. SECCIÓN DEL MAPA --- */
+.map-section {
+    width: 100%;
+    height: 450px;
+    background-color: #000;
+}
+
+
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    40% {
+        transform: translate(-50%, -15px);
+    }
+
+    60% {
+        transform: translate(-50%, -7px);
+    }
+}
+
+
+/* --- NUEVO: ESTILO ESPECÍFICO PARA REGLAS --- */
+.text-block.rules-box {
+    width: 95%;
+    /* Ocupa casi todo el ancho */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;
+    text-align: center;
+    border: 2px solid #ff0055;
+    /* Borde Rojo Neón */
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
+    /* Resplandor rojo */
+    transform: translateY(50px);
+    display: flex;
+    flex-direction: column;
+    /* Aparece desde abajo, no de los lados */
+}
+
+.rules-box h2 {
+    color: #ff0055;
+    /* Título Rojo */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255, 0, 85, 0.3);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.rules-list {
+    list-style: none;
+    text-align: left;
+    /* Lista alineada a la izquierda para leer mejor */
+    display: inline-block;
+    /* Bloque centrado */
+    margin-top: 20px;
+}
+
+.rules-list li {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+/* Clase de animación activa */
+.text-block.is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+    /* Resetea cualquier movimiento */
+}
+
+/* --- 3. NUEVO: SECCIÓN DE SPOTIFY (LADO A LADO) --- */
+
+.playlist-container {
+    display: flex;
+    /* Esto pone uno al lado del otro */
+    justify-content: center;
+    /* Centrados */
+    gap: 5px;
+    /* Espacio entre ellos */
+    flex-wrap: wrap;
+    /* Si es celular, uno baja */
+}
+
+.spotify-embed-a {
+    flex: 1 1 ;
+    width: 95%;
+    /* Crecen flexiblemente, mínimo 300px ancho */
+    height: 352px;
+    /* Altura estándar de playlist */
+    border-radius: 12px;
+    border: 0;
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
+    /* Brillo verde */
+}
+
+.spotify-embed-b {
+    flex: 1 1 ;
+    width: 95%;
+    /* Crecen flexiblemente, mínimo 300px ancho */
+    height: 352px;
+    /* Altura estándar de playlist */
+    border-radius: 12px;
+    border: 0;
+    box-shadow: 0 0 20px rgba(243, 59, 148, 0.2);
+    /* Brillo violeta */
+}
+
+.playlist-container-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* CADA COLUMNA (Título + Iframe) */
+.single-playlist-col {
+    flex: 1 1 400px;
+    /* Ancho mínimo 400px, si no entra, baja */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
