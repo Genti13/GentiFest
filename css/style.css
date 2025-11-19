@@ -93,6 +93,8 @@ body {
     /* Coincide con el final del degradado */
     position: relative;
     z-index: 2;
+
+    overflow: hidden;
     /* Asegura que el contenido tape la foto al subir */
 }
 
@@ -220,12 +222,14 @@ body {
     /* Centrados */
     gap: 5px;
     /* Espacio entre ellos */
+    flex-direction: column;
     flex-wrap: wrap;
     /* Si es celular, uno baja */
 }
 
+
 .spotify-embed-a {
-    flex: 1 1 ;
+    flex: 1 1;
     width: 95%;
     /* Crecen flexiblemente, mínimo 300px ancho */
     height: 352px;
@@ -237,7 +241,7 @@ body {
 }
 
 .spotify-embed-b {
-    flex: 1 1 ;
+    flex: 1 1;
     width: 95%;
     /* Crecen flexiblemente, mínimo 300px ancho */
     height: 352px;
@@ -260,4 +264,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* 3. DESKTOP (Grande) */
+@media screen and (min-width: 1024px) {
+    .playlist-container {
+        display: flex;
+        /* Esto pone uno al lado del otro */
+        justify-content: center;
+        /* Centrados */
+        gap: 5px;
+        /* Espacio entre ellos */
+        flex-wrap: wrap;
+        /* Si es celular, uno baja */
+    }
 }
