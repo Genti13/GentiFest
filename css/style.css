@@ -1,4 +1,6 @@
-/* Reset básico */
+/* =========================================
+   1. RESET & BASE
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -8,13 +10,14 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #121212;
-    /* Color de fondo principal */
+    /* Fondo principal */
     color: #ffffff;
     overflow-x: hidden;
 }
 
-/* --- 1. CONTENEDOR DE LA FOTO (HERO) --- */
-/* 1. ESTILO BASE (MÓVIL) */
+/* =========================================
+   2. HERO SECTION (Portada)
+   ========================================= */
 .hero-container {
     width: 100%;
     height: 100vh;
@@ -22,16 +25,14 @@ body {
     overflow: hidden;
 }
 
-/* La imagen real */
 .hero-image {
     width: 100%;
     height: 100%;
     transform: scale(1.6, 1.1);
     margin-top: 2rem;
-
 }
 
-/* 3. DESKTOP (Grande) */
+/* Media Query específico para Hero Image */
 @media screen and (min-width: 1024px) {
     .hero-image {
         margin-top: 10rem;
@@ -41,70 +42,110 @@ body {
     }
 }
 
-
-/* --- EL DEGRADADO A NEGRO (CORREGIDO) --- */
 .hero-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 30vh;
-    /* OCUPA EL 40% DE LA ALTURA DE LA PANTALLA */
-
-    /* Degradado de Transparente a Negro Puro */
+    /* Ocupa el 30% de la altura */
     background: linear-gradient(to bottom, transparent 0%, #000000 100%);
-
     z-index: 4;
-    /* Encima de la foto */
-    /*pointer-events: none;*/
-    /* Permite hacer click a través del degradado si fuera necesario */
 }
 
 .hero-overlay:hover {
     cursor: pointer;
 }
 
-
-/* La flechita */
 .scroll-indicator {
     position: absolute;
-    bottom: 60px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 3rem;
-    animation: bounce 2s infinite;
     color: #ffffff;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
     z-index: 10;
-    /* Encima del degradado y la foto */
+    animation: bounce 2s infinite;
 }
 
 .scroll-indicator:hover {
     cursor: pointer;
 }
 
+/* =========================================
+   3. COUNTDOWN (Cuenta atrás)
+   ========================================= */
+.countdown-wrapper {
+    position: absolute;
+    bottom: 130px;
+    /* Encima de la flecha */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+    pointer-events: none;
+}
 
-/* --- 2. SECCIÓN DE TEXTO INTERCALADO --- */
+.time-box {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #9d4edd;
+    /* Borde neón violeta */
+    border-radius: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    min-width: 70px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+}
+
+.time-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #57eb64;
+    /* Verde neón */
+    font-family: 'Courier New', monospace;
+}
+
+.time-label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+/* =========================================
+   4. LAYOUT & CONTENIDO GENERAL
+   ========================================= */
 .content-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 80px 20px;
     background-color: #121212;
-    /* Coincide con el final del degradado */
     position: relative;
     z-index: 2;
-
     overflow: hidden;
-    /* Asegura que el contenido tape la foto al subir */
 }
 
+.map-section {
+    width: 100%;
+    height: 450px;
+    background-color: #000;
+}
+
+/* =========================================
+   5. BLOQUES DE TEXTO (Zig-Zag)
+   ========================================= */
 .text-block {
     margin-bottom: 60px;
     padding: 30px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(157, 78, 221, 0.2);
-    width: 80%;
+    width: 90%;
     opacity: 0;
     transition: opacity 1s ease-out, transform 1s ease-out;
 }
@@ -115,7 +156,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* Zig-Zag */
+/* Lógica Zig-Zag */
 .text-block:nth-child(odd) {
     margin-right: auto;
     text-align: left;
@@ -130,20 +171,141 @@ body {
     transform: translateX(100px);
 }
 
+/* Estado visible (activado por JS) */
 .text-block.is-visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate(0, 0);
 }
 
-/* --- 3. SECCIÓN DEL MAPA --- */
-.map-section {
-    width: 100%;
-    height: 450px;
-    background-color: #000;
+/* =========================================
+   6. COMPONENTE: REGLAS (Rules Box)
+   ========================================= */
+.text-block.rules-box {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;
+    text-align: center;
+    border: 2px solid #ff0055;
+    /* Rojo Neón */
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
+    transform: translateY(50px);
+    /* Aparece desde abajo */
+    display: flex;
+    flex-direction: column;
 }
 
+.rules-box h2 {
+    color: #ff0055;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255, 0, 85, 0.3);
+    padding-bottom: 10px;
+    display: inline-block;
+}
 
+.rules-list {
+    list-style: none;
+    text-align: left;
+    display: inline-block;
+    margin-top: 20px;
+}
 
+.rules-list li {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   7. COMPONENTE: SPOTIFY
+   ========================================= */
+.playlist-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.playlist-container-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.single-playlist-col {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos compartidos de embed */
+.spotify-embed-a,
+.spotify-embed-b {
+    flex: 1 1;
+    width: 95%;
+    height: 352px;
+    border-radius: 12px;
+    border: 0;
+}
+
+.spotify-embed-a {
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
+    /* Verde */
+}
+
+.spotify-embed-b {
+    box-shadow: 0 0 20px rgba(243, 59, 148, 0.2);
+    /* Violeta */
+}
+
+/* Media Query para Spotify */
+@media screen and (min-width: 1024px) {
+    .playlist-container {
+        flex-direction: row;
+        /* Lado a lado en desktop */
+        gap: 5px;
+    }
+}
+
+/* =========================================
+   8. UTILIDADES: EFECTOS NEÓN
+   ========================================= */
+/* Neón Rosa */
+.neon-link-rosa {
+    color: #ff66cc;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #ff66cc, 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+}
+
+.neon-link-rosa:hover {
+    color: #ffffff;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ffffff, 0 0 15px #ff66cc, 0 0 30px #ff00ff, 0 0 50px #ff00ff;
+}
+
+/* Neón Verde */
+.neon-link-verde {
+    color: #43d416;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #6bff66, 0 0 15px #04ff00, 0 0 30px #00ff26;
+}
+
+.neon-link-verde:hover {
+    color: #ffffff;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ffffff, 0 0 15px #78ff66, 0 0 30px #04ff00, 0 0 50px #00ff00;
+}
+
+/* =========================================
+   9. ANIMACIONES
+   ========================================= */
 @keyframes bounce {
 
     0%,
@@ -161,202 +323,4 @@ body {
     60% {
         transform: translate(-50%, -7px);
     }
-}
-
-
-/* --- NUEVO: ESTILO ESPECÍFICO PARA REGLAS --- */
-.text-block.rules-box {
-    width: 95%;
-    /* Ocupa casi todo el ancho */
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 80px;
-    text-align: center;
-    border: 2px solid #ff0055;
-    /* Borde Rojo Neón */
-    box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
-    /* Resplandor rojo */
-    transform: translateY(50px);
-    display: flex;
-    flex-direction: column;
-    /* Aparece desde abajo, no de los lados */
-}
-
-.rules-box h2 {
-    color: #ff0055;
-    /* Título Rojo */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 1px solid rgba(255, 0, 85, 0.3);
-    padding-bottom: 10px;
-    display: inline-block;
-}
-
-.rules-list {
-    list-style: none;
-    text-align: left;
-    /* Lista alineada a la izquierda para leer mejor */
-    display: inline-block;
-    /* Bloque centrado */
-    margin-top: 20px;
-}
-
-.rules-list li {
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-}
-
-/* Clase de animación activa */
-.text-block.is-visible {
-    opacity: 1;
-    transform: translate(0, 0);
-    /* Resetea cualquier movimiento */
-}
-
-/* --- 3. NUEVO: SECCIÓN DE SPOTIFY (LADO A LADO) --- */
-
-.playlist-container {
-    display: flex;
-    /* Esto pone uno al lado del otro */
-    justify-content: center;
-    /* Centrados */
-    gap: 5px;
-    /* Espacio entre ellos */
-    flex-direction: column;
-    flex-wrap: wrap;
-    /* Si es celular, uno baja */
-}
-
-
-.spotify-embed-a {
-    flex: 1 1;
-    width: 95%;
-    /* Crecen flexiblemente, mínimo 300px ancho */
-    height: 352px;
-    /* Altura estándar de playlist */
-    border-radius: 12px;
-    border: 0;
-    box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
-    /* Brillo verde */
-}
-
-.spotify-embed-b {
-    flex: 1 1;
-    width: 95%;
-    /* Crecen flexiblemente, mínimo 300px ancho */
-    height: 352px;
-    /* Altura estándar de playlist */
-    border-radius: 12px;
-    border: 0;
-    box-shadow: 0 0 20px rgba(243, 59, 148, 0.2);
-    /* Brillo violeta */
-}
-
-.playlist-container-title {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* CADA COLUMNA (Título + Iframe) */
-.single-playlist-col {
-    flex: 1 1 400px;
-    /* Ancho mínimo 400px, si no entra, baja */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* 3. DESKTOP (Grande) */
-@media screen and (min-width: 1024px) {
-    .playlist-container {
-        display: flex;
-        /* Esto pone uno al lado del otro */
-        justify-content: center;
-        /* Centrados */
-        gap: 5px;
-        /* Espacio entre ellos */
-        flex-wrap: wrap;
-        /* Si es celular, uno baja */
-    }
-}
-
-/* --- Efecto Enlace Neón Rosa --- */
-.neon-link-rosa {
-    color: #ff66cc;
-    /* Color base del texto (un rosa intenso) */
-    font-weight: bold;
-    /* Un poco más grueso para que se note el efecto */
-    text-decoration: none;
-    /* Quitamos el subrayado típico de los enlaces */
-    letter-spacing: 1px;
-    /* Un poquito de espacio ayuda al neón */
-    transition: all 0.3s ease;
-    /* Suaviza la transición al pasar el mouse */
-
-    /* LA MAGIA DEL NEÓN: Múltiples sombras para crear el halo */
-    text-shadow:
-        0 0 5px #ff66cc,
-        /* Brillo cercano */
-        0 0 15px #ff00ff,
-        /* Brillo medio (más magenta) */
-        0 0 30px #ff00ff;
-    /* Brillo lejano y difuso */
-}
-
-/* Efecto al pasar el mouse (Hover) */
-.neon-link-rosa:hover {
-    color: #ffffff;
-    /* El centro se vuelve blanco como un tubo de luz encendido al máximo */
-    cursor: pointer;
-
-    /* Intensificamos el resplandor y lo hacemos más grande */
-    text-shadow:
-        0 0 5px #ffffff,
-        /* Brillo blanco cercano */
-        0 0 15px #ff66cc,
-        /* Brillo rosa medio */
-        0 0 30px #ff00ff,
-        /* Halo magenta grande */
-        0 0 50px #ff00ff;
-    /* Halo magenta extra grande */
-}
-
-.neon-link-verde {
-    color: #43d416;
-    /* Color base del texto (un verde intenso) */
-    font-weight: bold;
-    /* Un poco más grueso para que se note el efecto */
-    text-decoration: none;
-    /* Quitamos el subrayado típico de los enlaces */
-    letter-spacing: 1px;
-    /* Un poquito de espacio ayuda al neón */
-    transition: all 0.3s ease;
-    /* Suaviza la transición al pasar el mouse */
-
-    /* LA MAGIA DEL NEÓN: Múltiples sombras para crear el halo */
-    text-shadow:
-        0 0 5px #6bff66,
-        /* Brillo cercano */
-        0 0 15px #04ff00,
-        /* Brillo medio (más magenta) */
-        0 0 30px #00ff26;
-    /* Brillo lejano y difuso */
-}
-
-/* Efecto al pasar el mouse (Hover) */
-.neon-link-verde:hover {
-    color: #ffffff;
-    /* El centro se vuelve blanco como un tubo de luz encendido al máximo */
-    cursor: pointer;
-
-    /* Intensificamos el resplandor y lo hacemos más grande */
-    text-shadow:
-        0 0 5px #ffffff,
-        /* Brillo blanco cercano */
-        0 0 15px #78ff66,
-        /* Brillo rosa medio */
-        0 0 30px #04ff00,
-        /* Halo magenta grande */
-        0 0 50px #00ff00;
-    /* Halo magenta extra grande */
 }
