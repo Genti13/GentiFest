@@ -279,3 +279,84 @@ body {
         /* Si es celular, uno baja */
     }
 }
+
+/* --- Efecto Enlace Neón Rosa --- */
+.neon-link-rosa {
+    color: #ff66cc;
+    /* Color base del texto (un rosa intenso) */
+    font-weight: bold;
+    /* Un poco más grueso para que se note el efecto */
+    text-decoration: none;
+    /* Quitamos el subrayado típico de los enlaces */
+    letter-spacing: 1px;
+    /* Un poquito de espacio ayuda al neón */
+    transition: all 0.3s ease;
+    /* Suaviza la transición al pasar el mouse */
+
+    /* LA MAGIA DEL NEÓN: Múltiples sombras para crear el halo */
+    text-shadow:
+        0 0 5px #ff66cc,
+        /* Brillo cercano */
+        0 0 15px #ff00ff,
+        /* Brillo medio (más magenta) */
+        0 0 30px #ff00ff;
+    /* Brillo lejano y difuso */
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.neon-link-rosa:hover {
+    color: #ffffff;
+    /* El centro se vuelve blanco como un tubo de luz encendido al máximo */
+    cursor: pointer;
+
+    /* Intensificamos el resplandor y lo hacemos más grande */
+    text-shadow:
+        0 0 5px #ffffff,
+        /* Brillo blanco cercano */
+        0 0 15px #ff66cc,
+        /* Brillo rosa medio */
+        0 0 30px #ff00ff,
+        /* Halo magenta grande */
+        0 0 50px #ff00ff;
+    /* Halo magenta extra grande */
+}
+
+.neon-link-verde {
+    color: #43d416;
+    /* Color base del texto (un verde intenso) */
+    font-weight: bold;
+    /* Un poco más grueso para que se note el efecto */
+    text-decoration: none;
+    /* Quitamos el subrayado típico de los enlaces */
+    letter-spacing: 1px;
+    /* Un poquito de espacio ayuda al neón */
+    transition: all 0.3s ease;
+    /* Suaviza la transición al pasar el mouse */
+
+    /* LA MAGIA DEL NEÓN: Múltiples sombras para crear el halo */
+    text-shadow:
+        0 0 5px #6bff66,
+        /* Brillo cercano */
+        0 0 15px #04ff00,
+        /* Brillo medio (más magenta) */
+        0 0 30px #00ff26;
+    /* Brillo lejano y difuso */
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.neon-link-verde:hover {
+    color: #ffffff;
+    /* El centro se vuelve blanco como un tubo de luz encendido al máximo */
+    cursor: pointer;
+
+    /* Intensificamos el resplandor y lo hacemos más grande */
+    text-shadow:
+        0 0 5px #ffffff,
+        /* Brillo blanco cercano */
+        0 0 15px #78ff66,
+        /* Brillo rosa medio */
+        0 0 30px #04ff00,
+        /* Halo magenta grande */
+        0 0 50px #00ff00;
+    /* Halo magenta extra grande */
+}
