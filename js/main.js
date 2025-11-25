@@ -56,7 +56,7 @@ function initScrollAnimations() {
    Lógica del temporizador
    ========================================= */
 function initCountdown() {
-    const targetDate = new Date("Dec 6, 2025 22:00:00").getTime();
+    const targetDate = new Date("Dec 13, 2025 22:00:00").getTime();
     
     // Función auxiliar para agregar el "0" delante (ej: 05 en vez de 5)
     const formatTime = (time) => time < 10 ? `0${time}` : time;
