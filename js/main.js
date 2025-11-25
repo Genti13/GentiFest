@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initSmoothScroll();
     initScrollAnimations();
     initCountdown();
+    initInventory(); // <--- Nueva función agregada
 
 });
 
@@ -96,4 +97,81 @@ function initCountdown() {
     // Ejecutamos una vez al inicio para evitar el retraso de 1 segundo
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
+}
+
+/* =========================================
+   4. FUNCIÓN: INVENTARIO (GOOGLE SHEETS)
+   Carga y renderiza el stock de bebidas
+   ========================================= */
+function initInventory() {
+    // ID del contenedor en tu HTML (asegúrate de tener un <ul id="inventario-lista"></ul>)
+    const listContainer = document.getElementById('drinks-grid');
+    
+    // Si no existe el contenedor en la página actual, salimos para evitar errores
+    if (!listContainer) return;
+
+    // URL de tu Google Sheet publicado como CSV
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlWl9vq7EiIY060LA8kHAyA4QSkXZpMg8ZJD3rGgmnmd-WAeqaYfBEpIrWQRSV0Rw5DJ5uO-aa1avC/pub?gid=0&single=true&output=csv'; 
+
+    // Verificamos que PapaParse esté cargado
+    if (typeof Papa === 'undefined') {
+        console.error('PapaParse no está definido. Asegúrate de incluir la librería.');
+        listContainer.innerHTML = '<li>Error: Librería no cargada.</li>';
+        return;
+    }
+
+    listContainer.innerHTML = '<li>Cargando stock...</li>';
+
+    Papa.parse(SHEET_URL, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            console.log(results);
+            
+            renderList(results.data, listContainer);
+        },
+        error: function(err) {
+            console.error("Error al cargar inventario:", err);
+            listContainer.innerHTML = '<li>Error al cargar los datos.</li>';
+        }
+    });
+
+    // Sub-función para renderizar (mantiene el scope limpio)
+    function renderList(data, container) {
+        container.innerHTML = ''; 
+
+        if (!data || data.length === 0) {
+            container.innerHTML = '<li>No hay datos disponibles.</li>';
+            return;
+        }
+
+        data.forEach(row => {
+            // Mapeo de columnas exactas del Excel
+            const nombre = row["Nombre del elemento"];
+            const estado = row["Estado"];
+
+            // Si la fila está vacía o no tiene nombre, la saltamos
+            if (!nombre) return;
+
+            const drink_item = document.createElement('div');
+            drink_item.className = 'drink-item'; // Clase para CSS
+
+            // Nombre
+            const spanNombre = document.createElement('div');
+            spanNombre.className = 'drink-name';
+            spanNombre.textContent = nombre;
+
+            // Stock
+            const spanStock = document.createElement('div'); 
+            spanStock.textContent = estado;
+            spanStock.className = 'drink-desc';
+            
+            // Clases de estado para CSS
+            spanStock.classList.add(estado == "Agotado" ? 'neon-rojo' : 'neon-verde');
+
+            drink_item.appendChild(spanNombre);
+            drink_item.appendChild(spanStock);
+            container.appendChild(drink_item);
+        });
+    }
 }

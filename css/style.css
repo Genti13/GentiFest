@@ -184,7 +184,6 @@ body {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 80px;
     text-align: center;
     border: 2px solid #ff0055;
     /* Rojo Neón */
@@ -225,6 +224,10 @@ body {
     gap: 5px;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+.spotify-wrapper {
+    margin-top: 80px;
 }
 
 .playlist-container-title {
@@ -323,4 +326,88 @@ body {
     60% {
         transform: translate(-50%, -7px);
     }
+}
+
+/* =========================================
+   10. GRILLA DE TRAGOS
+   ========================================= */
+.text-block.drinks-box {
+    width: 90%;
+    /* Un poco más ancha para que entren bien las columnas */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 2px solid #00f3ff;
+    /* Borde CIAN Neón */
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+    transform: translateY(50px);
+    /* Aparece desde abajo */
+}
+
+.drinks-box h2 {
+    color: #00f3ff;
+    /* Título Cian */
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.drinks-grid {
+    display: grid;
+    /* "repeat(3, 1fr)" significa: crea 3 columnas de igual tamaño */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    text-align: left;
+}
+
+@media screen and (min-width: 1024px) {
+    .drinks-grid {
+        display: grid;
+        /* "repeat(3, 1fr)" significa: crea 3 columnas de igual tamaño */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        text-align: left;
+    }
+}
+
+.drink-item {
+    padding: 10px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.drink-name {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.7);
+}
+
+.drink-desc {
+    color: #aaaaaa;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.neon-verde {
+    color: #43d416;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #6bff66, 0 0 15px #04ff00, 0 0 30px #00ff26;
+}
+
+
+.neon-rojo {
+    color: #d41616;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #ff6666, 0 0 15px #ff0000, 0 0 30px #ff0000;
 }
