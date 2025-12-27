@@ -57,7 +57,7 @@ function initScrollAnimations() {
    Lógica del temporizador
    ========================================= */
 function initCountdown() {
-    const targetDate = new Date("Dec 13, 2025 22:00:00").getTime();
+    const targetDate = new Date("Jan 31, 2026 22:00:00").getTime();
 
     // Función auxiliar para agregar el "0" delante (ej: 05 en vez de 5)
     const formatTime = (time) => time < 10 ? `0${time}` : time;
@@ -111,7 +111,7 @@ function initInventory() {
     if (!listContainer) return;
 
     // URL de tu Google Sheet publicado como CSV
-    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlWl9vq7EiIY060LA8kHAyA4QSkXZpMg8ZJD3rGgmnmd-WAeqaYfBEpIrWQRSV0Rw5DJ5uO-aa1avC/pub?gid=0&single=true&output=csv';
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQlWl9vq7EiIY060LA8kHAyA4QSkXZpMg8ZJD3rGgmnmd-WAeqaYfBEpIrWQRSV0Rw5DJ5uO-aa1avC/pub?output=csv';
 
     // Verificamos que PapaParse esté cargado
     if (typeof Papa === 'undefined') {
@@ -126,6 +126,8 @@ function initInventory() {
         download: true,
         header: true,
         complete: function (results) {
+            console.log(Papa);
+            
             console.log(results);
 
             renderList(results.data, listContainer);
